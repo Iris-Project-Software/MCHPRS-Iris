@@ -50,7 +50,7 @@ pub const PLOT_BLOCK_WIDTH: i32 = PLOT_WIDTH * 16;
 pub const NUM_CHUNKS: usize = PLOT_WIDTH.pow(2) as usize;
 
 /// The height of the world in sections (Default: 16, Max: 127)
-pub const PLOT_SECTIONS: usize = 16;
+pub const PLOT_SECTIONS: usize = 16 * 2;
 /// The plot height in blocks
 pub const PLOT_BLOCK_HEIGHT: i32 = PLOT_SECTIONS as i32 * 16;
 
