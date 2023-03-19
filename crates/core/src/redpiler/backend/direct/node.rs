@@ -1,4 +1,5 @@
-use mchprs_blocks::blocks::ComparatorMode;
+use crate::redpiler::block_is_dot;
+use mchprs_blocks::blocks::{Block, ComparatorMode};
 use smallvec::SmallVec;
 use std::ops::{Index, IndexMut};
 
@@ -112,7 +113,11 @@ pub enum NodeType {
 }
 
 impl NodeType {
-    pub fn is_io_block(self) -> bool {
+    pub fn is_io_block(self, block: Block) -> bool {
+        if block_is_dot(block) {
+            return true;
+        }
+
         matches!(
             self,
             NodeType::Lamp

@@ -180,7 +180,7 @@ impl JITBackend for DirectBackend {
                 world.set_block_entity(pos, block_entity);
             }
 
-            if io_only && !node.ty.is_io_block() {
+            if io_only && !node.ty.is_io_block(block) {
                 world.set_block(pos, block);
             }
         }
@@ -232,7 +232,7 @@ impl JITBackend for DirectBackend {
             let Some((pos, block)) = &mut self.blocks[i] else {
                 continue;
             };
-            if node.changed && (!io_only || node.ty.is_io_block()) {
+            if node.changed && (!io_only || node.ty.is_io_block(*block)) {
                 if let Some(powered) = block_powered_mut(block) {
                     *powered = node.powered
                 }

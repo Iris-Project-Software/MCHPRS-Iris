@@ -8,6 +8,7 @@
 //! There are no requirements for this pass.
 
 use super::Pass;
+use crate::redpiler::block_is_dot;
 use crate::redpiler::compile_graph::{CompileGraph, CompileNode, NodeState, NodeType};
 use crate::redpiler::{CompilerInput, CompilerOptions};
 use crate::redstone;
@@ -68,7 +69,7 @@ fn for_pos<W: World>(ignore_wires: bool, world: &W, graph: &mut CompileGraph, po
         _ => false,
     };
 
-    if ignore_wires && ty == NodeType::Wire {
+    if ignore_wires && ty == NodeType::Wire && !block_is_dot(block) {
         return;
     }
 

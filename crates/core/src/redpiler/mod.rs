@@ -6,6 +6,7 @@ mod passes;
 
 use crate::redpiler::passes::make_default_pass_manager;
 use crate::redstone;
+use crate::redstone::wire::is_dot;
 use crate::world::{for_each_block_mut_optimized, World};
 use backend::BackendDispatcher;
 use backend::JITBackend;
@@ -31,6 +32,13 @@ fn block_powered_mut(block: &mut Block) -> Option<&mut bool> {
         Block::IronTrapdoor { powered, .. } => powered,
         _ => return None,
     })
+}
+
+fn block_is_dot(block: Block) -> bool {
+    match block {
+        Block::RedstoneWire { wire } => is_dot(wire),
+        _ => false,
+    }
 }
 
 #[derive(Default, PartialEq, Eq, Debug)]
